@@ -1,0 +1,6 @@
+from playwright.sync_api import Page
+
+
+class FooterPage:
+    def __init__(self, page: Page):
+        pass

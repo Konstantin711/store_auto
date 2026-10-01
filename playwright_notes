@@ -1,0 +1,710 @@
+# ============================================================
+# PLAYWRIGHT LOCATORS CHEAT SHEET
+# ============================================================
+
+
+# ============================================================
+# FIND LOCATORS
+# ============================================================
+
+#  --- by css / xpath ---
+#  - page.locator(".product-card")
+#  - page.locator("#email")
+#  - page.locator("//button")
+#  - product.locator(".price")
+
+
+#  --- by role - preferred locator !!! ---
+#  - page.get_by_role("button", name="Add to cart")
+#  - page.get_by_role("link", name="Catalog")
+#  - page.get_by_role("heading", name="Products")
+#  - page.get_by_role("checkbox", name="Remember me")
+
+
+#  --- by text ---
+#  - page.get_by_text("Black Hoodie")
+#  - page.get_by_text("Black Hoodie", exact=True)
+#
+#  import re
+#  - page.get_by_text(re.compile("black hoodie", re.IGNORECASE))
+
+
+#  --- by label ---
+#  - page.get_by_label("Email")
+#  - page.get_by_label("Password")
+
+
+#  --- by placeholder ---
+#  - page.get_by_placeholder("Search products")
+
+
+#  --- by test id ---
+#  HTML:
+#  <button data-testid="add-to-cart">
+#
+#  - page.get_by_test_id("add-to-cart")
+
+
+#  --- by alt text ---
+#  HTML:
+#  <img alt="Black Hoodie">
+#
+#  - page.get_by_alt_text("Black Hoodie")
+
+
+#  --- by title ---
+#  HTML:
+#  <button title="Close">
+#
+#  - page.get_by_title("Close")
+
+
+# ============================================================
+# FILTER / SELECT LOCATORS
+# ============================================================
+
+#  --- filter - in case if many objects ---
+#  products = page.get_by_test_id("product-card")
+#
+#  product = products.filter(
+#      has_text="Black Hoodie"
+#  )
+
+
+#  --- filter by NOT text ---
+#  - products.filter(has_not_text="Sold out")
+
+
+#  --- filter by child locator ---
+#  product = products.filter(
+#      has=page.get_by_role("button", name="Buy")
+#  )
+
+
+#  --- filter without child locator ---
+#  product = products.filter(
+#      has_not=page.get_by_text("Sold out")
+#  )
+
+
+#  --- first element ---
+#  - products.first
+
+
+#  --- last element ---
+#  - products.last
+
+
+#  --- element by index ---
+#  index starts from 0
+#
+#  - products.nth(0)
+#  - products.nth(1)
+#  - products.nth(5)
+
+
+#  --- AND locator ---
+#  element must match BOTH conditions
+#
+#  button = page.get_by_role("button").and_(
+#      page.get_by_title("Subscribe")
+#  )
+
+
+#  --- OR locator ---
+#  element can match first OR second locator
+#
+#  continue_button = page.get_by_role("button", name="Continue")
+#  dialog = page.get_by_role("dialog")
+#
+#  result = continue_button.or_(dialog)
+
+
+#  --- normalize locator ---
+#  creates more resilient locator representation
+#
+#  - locator.normalize()
+
+
+# ============================================================
+# ACTIONS
+# ============================================================
+
+#  --- click ---
+#  - button.click()
+
+
+#  --- right click ---
+#  - button.click(button="right")
+
+
+#  --- click with modifier ---
+#  - button.click(modifiers=["Control"])
+#  - button.click(modifiers=["Shift"])
+
+
+#  --- force click ---
+#  use only if really needed !!!
+#
+#  - button.click(force=True)
+
+
+#  --- double click ---
+#  - element.dblclick()
+
+
+#  --- fill input ---
+#  preferred way to enter text
+#
+#  - email_input.fill("test@test.com")
+
+
+#  --- clear input ---
+#  - email_input.clear()
+
+
+#  --- press keyboard key ---
+#  - input_field.press("Enter")
+#  - input_field.press("Escape")
+#  - input_field.press("Control+A")
+#  - input_field.press("ArrowDown")
+
+
+#  --- type characters one by one ---
+#  use only when JS reacts to keyboard events
+#
+#  - input_field.press_sequentially("Hello")
+#
+#  with delay:
+#
+#  - input_field.press_sequentially("Hello", delay=100)
+
+
+#  --- checkbox check ---
+#  - checkbox.check()
+
+
+#  --- checkbox uncheck ---
+#  - checkbox.uncheck()
+
+
+#  --- set checkbox state ---
+#  - checkbox.set_checked(True)
+#  - checkbox.set_checked(False)
+
+
+#  --- select option ---
+#  HTML <select>
+#
+#  by value:
+#  - country.select_option("UA")
+#
+#  by label:
+#  - country.select_option(label="Ukraine")
+#
+#  by index:
+#  - country.select_option(index=2)
+
+
+#  --- select multiple options ---
+#  - select.select_option(
+#      value=["red", "green"]
+#    )
+
+
+#  --- upload file ---
+#  - upload_input.set_input_files("image.png")
+
+
+#  --- upload multiple files ---
+#  - upload_input.set_input_files([
+#      "image1.png",
+#      "image2.png",
+#    ])
+
+
+#  --- hover ---
+#  - product.hover()
+
+
+#  --- focus ---
+#  - input_field.focus()
+
+
+#  --- remove focus ---
+#  - input_field.blur()
+
+
+#  --- tap ---
+#  mostly for touch/mobile scenarios
+#
+#  - button.tap()
+
+
+#  --- select text ---
+#  selects text inside input/element
+#
+#  - input_field.select_text()
+
+
+# ============================================================
+# DRAG AND DROP
+# ============================================================
+
+#  --- drag element to another element ---
+#  - source.drag_to(target)
+
+
+#  --- drop ---
+#  advanced / uncommon
+#
+#  - locator.drop(...)
+
+
+# ============================================================
+# SCROLL
+# ============================================================
+
+#  --- scroll element into view ---
+#  usually NOT needed before click,
+#  Playwright does it automatically
+#
+#  - product.scroll_into_view_if_needed()
+
+
+# ============================================================
+# GET TEXT
+# ============================================================
+
+#  --- visible text ---
+#  - text = product_name.inner_text()
+
+
+#  --- DOM textContent ---
+#  can include hidden text
+#
+#  - text = product_name.text_content()
+
+
+#  --- inner texts from many elements ---
+#  products = page.get_by_test_id("product-card")
+#
+#  - texts = products.all_inner_texts()
+#
+#  example result:
+#  ["Hoodie", "T-Shirt", "Pants"]
+
+
+#  --- textContent from many elements ---
+#  - texts = products.all_text_contents()
+
+
+# ============================================================
+# INPUT VALUES
+# ============================================================
+
+#  --- get current input value ---
+#  - value = email_input.input_value()
+
+
+# ============================================================
+# ATTRIBUTES / HTML
+# ============================================================
+
+#  --- get attribute ---
+#  - href = link.get_attribute("href")
+#  - product_id = product.get_attribute("data-product-id")
+
+
+#  --- get inner HTML ---
+#  - html = element.inner_html()
+
+
+# ============================================================
+# ELEMENT STATE
+# ============================================================
+
+#  --- is visible ---
+#  returns True / False immediately
+#
+#  - locator.is_visible()
+
+
+#  --- is hidden ---
+#  - locator.is_hidden()
+
+
+#  --- is enabled ---
+#  - locator.is_enabled()
+
+
+#  --- is disabled ---
+#  - locator.is_disabled()
+
+
+#  --- is editable ---
+#  - locator.is_editable()
+
+
+#  --- is checked ---
+#  - checkbox.is_checked()
+
+
+# ============================================================
+# IMPORTANT:
+#
+# is_visible(), is_enabled(), is_checked()
+# check state immediately
+#
+# for ASSERTIONS usually prefer:
+#
+# expect(locator).to_be_visible()
+# expect(locator).to_be_enabled()
+# expect(locator).to_be_checked()
+#
+# because expect() has auto retry
+# ============================================================
+
+
+# ============================================================
+# COUNT / COLLECTIONS
+# ============================================================
+
+#  --- count elements ---
+#  - count = products.count()
+
+
+#  --- better for assertion ---
+#  - expect(products).to_have_count(10)
+
+
+#  --- get all locators ---
+#  does NOT wait until dynamic list finishes loading
+#
+#  products_list = products.all()
+#
+#  for product in products_list:
+#      print(product.inner_text())
+
+
+# ============================================================
+# WAITING
+# ============================================================
+
+#  --- wait until visible ---
+#  - locator.wait_for()
+
+
+#  --- wait explicitly for visible ---
+#  - locator.wait_for(state="visible")
+
+
+#  --- wait until hidden ---
+#  - locator.wait_for(state="hidden")
+
+
+#  --- wait until added to DOM ---
+#  - locator.wait_for(state="attached")
+
+
+#  --- wait until removed from DOM ---
+#  - locator.wait_for(state="detached")
+
+
+#  NOTE:
+#  usually you DON'T need:
+#
+#  locator.wait_for()
+#  locator.click()
+#
+#  because click() already has auto-wait
+#
+#  usually enough:
+#
+#  locator.click()
+
+
+#  --- wait for custom JS condition ---
+#  advanced
+#
+#  locator.wait_for_function(
+#      "element => element.dataset.status === 'ready'"
+#  )
+
+
+# ============================================================
+# SCREENSHOT
+# ============================================================
+
+#  --- screenshot only one element ---
+#  - product.screenshot(path="product.png")
+
+
+# ============================================================
+# POSITION / SIZE
+# ============================================================
+
+#  --- get coordinates and size ---
+#  box = element.bounding_box()
+#
+#  example:
+#
+#  {
+#      "x": 100,
+#      "y": 200,
+#      "width": 300,
+#      "height": 100,
+#  }
+
+
+# ============================================================
+# DEBUG
+# ============================================================
+
+#  --- highlight element in browser ---
+#  - locator.highlight()
+
+
+#  --- remove highlight ---
+#  - locator.hide_highlight()
+
+
+#  --- add human-readable locator description ---
+#  useful in traces / reports
+#
+#  checkout_button = (
+#      page
+#      .get_by_test_id("checkout")
+#      .describe("Checkout button")
+#  )
+
+
+# ============================================================
+# ACCESSIBILITY
+# ============================================================
+
+#  --- get ARIA snapshot ---
+#  advanced / accessibility testing
+#
+#  - snapshot = locator.aria_snapshot()
+
+
+# ============================================================
+# JAVASCRIPT
+# ============================================================
+
+#  --- execute JS on one element ---
+#  product_id = product.evaluate(
+#      "el => el.dataset.productId"
+#  )
+
+
+#  --- execute JS on all matched elements ---
+#  texts = products.evaluate_all(
+#      "elements => elements.map(e => e.textContent)"
+#  )
+
+
+#  --- execute JS and return JSHandle ---
+#  advanced
+#
+#  handle = locator.evaluate_handle(
+#      "el => el"
+#  )
+
+
+# ============================================================
+# DOM EVENTS
+# ============================================================
+
+#  --- dispatch DOM event ---
+#  does NOT simulate real user interaction
+#
+#  - locator.dispatch_event("click")
+#  - locator.dispatch_event("mouseover")
+#
+#  for real click prefer:
+#
+#  - locator.click()
+
+
+# ============================================================
+# IFRAMES
+# ============================================================
+
+#  --- find elements inside iframe ---
+#  frame = page.frame_locator("#payment-frame")
+#
+#  frame.get_by_label(
+#      "Card number"
+#  ).fill("123456789")
+
+
+#  --- get frame from iframe locator ---
+#  iframe = page.locator("iframe")
+#  frame = iframe.content_frame
+#
+#  frame.get_by_role(
+#      "button",
+#      name="Pay"
+#  ).click()
+
+
+# ============================================================
+# LOCATOR PROPERTIES
+# ============================================================
+
+#  --- first matching element ---
+#  - locator.first
+
+
+#  --- last matching element ---
+#  - locator.last
+
+
+#  --- page where locator belongs ---
+#  - locator.page
+
+
+#  --- iframe content ---
+#  - locator.content_frame
+
+
+#  --- only visible matching elements ---
+#  - locator.visible
+
+
+#  --- locator description ---
+#  - locator.description()
+
+
+# ============================================================
+# DEPRECATED / DISCOURAGED
+# ============================================================
+
+#  --- element_handle ---
+#  discouraged - prefer Locator
+#
+#  - locator.element_handle()
+
+
+#  --- element_handles ---
+#  discouraged - prefer Locator
+#
+#  - locator.element_handles()
+
+
+#  --- type ---
+#  deprecated
+#
+#  DON'T:
+#  - locator.type("Hello")
+#
+#  USE:
+#  - locator.fill("Hello")
+#
+#  or if typing character by character is required:
+#  - locator.press_sequentially("Hello")
+
+
+# ============================================================
+# PLAYWRIGHT EXPECT - VERY IMPORTANT
+# ============================================================
+
+#  import:
+#
+#  from playwright.sync_api import expect
+
+
+#  --- visible ---
+#  - expect(locator).to_be_visible()
+
+
+#  --- hidden ---
+#  - expect(locator).to_be_hidden()
+
+
+#  --- enabled ---
+#  - expect(locator).to_be_enabled()
+
+
+#  --- disabled ---
+#  - expect(locator).to_be_disabled()
+
+
+#  --- checked ---
+#  - expect(locator).to_be_checked()
+
+
+#  --- exact text ---
+#  - expect(locator).to_have_text("Black Hoodie")
+
+
+#  --- contains text ---
+#  - expect(locator).to_contain_text("Hoodie")
+
+
+#  --- input value ---
+#  - expect(locator).to_have_value("test@test.com")
+
+
+#  --- elements count ---
+#  - expect(locator).to_have_count(10)
+
+
+# ============================================================
+# MOST USED LOCATORS - LEARN THESE FIRST
+# ============================================================
+
+# FIND:
+#
+#  page.get_by_role(...)
+#  page.get_by_test_id(...)
+#  page.get_by_text(...)
+#  page.get_by_label(...)
+#  page.get_by_placeholder(...)
+#  page.locator(...)
+#  locator.filter(...)
+#  locator.first
+#  locator.last
+#  locator.nth(...)
+
+
+# ACTIONS:
+#
+#  locator.click()
+#  locator.fill()
+#  locator.clear()
+#  locator.check()
+#  locator.uncheck()
+#  locator.select_option()
+#  locator.hover()
+#  locator.press()
+#  locator.set_input_files()
+
+
+# READ:
+#
+#  locator.inner_text()
+#  locator.text_content()
+#  locator.input_value()
+#  locator.get_attribute()
+#  locator.count()
+
+
+# STATE:
+#
+#  locator.is_visible()
+#  locator.is_enabled()
+#  locator.is_checked()
+
+
+# ASSERTIONS:
+#
+#  expect(locator).to_be_visible()
+#  expect(locator).to_have_text(...)
+#  expect(locator).to_contain_text(...)
+#  expect(locator).to_have_value(...)
+#  expect(locator).to_have_count(...)
+#  expect(locator).to_be_enabled()
+#  expect(locator).to_be_checked()
