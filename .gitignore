@@ -1,0 +1,64 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pytype/
+.hypothesis/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Environment variables and local secrets
+.env
+.env.*
+!.env.example
+
+# Test coverage and reports
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.tox/
+.nox/
+junit.xml
+test-results/
+allure-results/
+allure-report/
+
+# Playwright artifacts
+playwright-report/
+blob-report/
+traces/
+videos/
+screenshots/
+
+# Packaging and build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+
+# IDEs and editors
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+*~
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+.cache/
