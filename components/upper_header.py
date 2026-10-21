@@ -15,8 +15,8 @@ class UpperHeader:
         self.contact_email = page.locator(
             "//div[@class='top-header-contacts']/a[@class='h-email']"
         )
-        self.tik_tok_link = page.get_by_test_id("instagram-link")
-        self.insta_link = page.get_by_test_id("tiktok-link")
+        self.tik_tok_link = page.get_by_test_id("tiktok-link")
+        self.insta_link = page.get_by_test_id("instagram-link")
 
         self.login_register_link = page.locator("//a[@href='/login']")
         self.logged_user_menu = page.locator("//div[contains(@class, 'user-email')]/a")
