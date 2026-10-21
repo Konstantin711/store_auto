@@ -1,4 +1,4 @@
-from playwright.sync_api import Page
+from playwright.sync_api import Page, expect
 
 from components.footer import FooterPage
 from components.main_header import MainHeader
@@ -21,3 +21,6 @@ class BasePage:
 
     def get_title(self) -> str:
         return self.page.title()
+
+    def check_url(self, expected_url: str):
+        expect(self.page).to_have_url(expected_url)

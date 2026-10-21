@@ -3,17 +3,17 @@ from playwright.sync_api import Page
 
 class UpperHeader:
     def __init__(self, page: Page):
-        self.about_us_page_link = page.get_by_role("link", name="Про нас", exact=True)
+        self.about_us_page_link = page.locator("//nav[contains(@class, 'top-header')]//a[@href='/about_us']")
         self.payment_delivery_page_link = page.get_by_role("link", name="Оплата та Доставка", exact=True)
 
-        self.contact_phone_number = ''
-        self.contact_email = ''
+        self.contact_phone_number = page.locator("//div[@class='top-header-contacts']/a[@class='h-phone']")
+        self.contact_email = page.locator("//div[@class='top-header-contacts']/a[@class='h-email']")
 
-        self.tik_tok_link = ''
-        self.insta_link = ''
+        self.tik_tok_link = page.get_by_test_id("instagram-link")
+        self.insta_link = page.get_by_test_id("tiktok-link")
 
-        self.login_register_link = ''
-        self.logged_user_menu = ''
+        self.login_register_link = page.locator("//a[@href='/login']")
+        self.logged_user_menu = page.locator("//div[contains(@class, 'user-email')]/a")
 
 
     def open_about_us_page(self):
