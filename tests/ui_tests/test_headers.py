@@ -101,3 +101,49 @@ def test_instagram_link(main_page):
     expect(second_page).to_have_url("https://www.instagram.com/")
 
 
+@pytest.mark.test_id(id="HDR-UP-008")
+def test_tiktok_link(main_page):
+    """
+    title: TikTok link
+    """
+
+    main_page.open(url="http://localhost:3000/")
+
+    tiktok = main_page.upper_header.tik_tok_link
+    expect(tiktok).to_be_visible()
+    expect(tiktok).to_have_attribute("href", "https://www.tiktok.com")
+
+    with tiktok.page.expect_popup() as popup_info:
+        tiktok.click()
+
+    second_page = popup_info.value
+    expect(second_page).to_have_url("https://www.tiktok.com/")
+
+
+@pytest.mark.test_id(id="HDR-UP-009")
+def test_login_link(main_page):
+    """
+    title: Account icon for guest
+    """
+
+    main_page.open(url="http://localhost:3000/")
+
+    login = main_page.upper_header.login_register_link
+    expect(login).to_be_visible()
+    expect(login).to_have_attribute("href", "/login")
+
+    login.click()
+    main_page.check_url("http://localhost:3000/login")
+
+
+@pytest.mark.test_id(id="HDR-UP-010")
+def test_login_link(main_page):
+    """
+    title: Account icon for authenticated user
+    """
+
+    main_page.open(url="http://localhost:3000/login")
+
+
+
+
