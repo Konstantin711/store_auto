@@ -4,7 +4,7 @@ from playwright.sync_api import Page
 class UpperHeader:
     def __init__(self, page: Page):
         self.about_us_page_link = page.locator("//nav[contains(@class, 'top-header')]//a[@href='/about_us']")
-        self.payment_delivery_page_link = page.get_by_role("link", name="Оплата та Доставка", exact=True)
+        self.payment_delivery_page_link = page.locator("//nav[contains(@class, 'top-header')]//a[@href='/delivery']")
 
         self.contact_phone_number = page.locator("//div[@class='top-header-contacts']/a[@class='h-phone']")
         self.contact_email = page.locator("//div[@class='top-header-contacts']/a[@class='h-email']")
