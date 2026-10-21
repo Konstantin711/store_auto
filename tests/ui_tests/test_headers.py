@@ -32,3 +32,19 @@ def test_delivery_and_pay_link(main_page):
 
     delivery_and_pay_link.click()
     main_page.check_url("http://localhost:3000/delivery")
+
+
+@pytest.mark.test_id(id="HDR-UP-003")
+def test_phone_number_display(main_page):
+    """
+    title: Phone number display
+    """
+
+    main_page.open(url="http://localhost:3000/")
+
+    phone_number = main_page.upper_header.contact_phone_number
+    expect(phone_number).to_be_visible()
+
+    expect(phone_number).to_have_text("+38 (000) 000-00-00")
+    expect(phone_number).to_have_attribute("href", "tel:+380000000000")
+
