@@ -22,7 +22,7 @@ class UpperHeader:
         self.logged_user_menu = page.locator("//div[contains(@class, 'user-email')]/a")
 
         self.menu_cabinet_link = page.get_by_role("link", name="Кабінет", exact=True)
-        self.menu_favorite_link = page.get_by_role("link", name="Обране", exact=True)
+        self.menu_favorite_link = page.locator("//div[contains(@class, 'user-email')]//a[text()='Обране']")
         self.menu_log_out_link = page.get_by_role("link", name="вийти", exact=True)
 
 

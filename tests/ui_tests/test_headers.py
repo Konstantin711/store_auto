@@ -157,4 +157,21 @@ def test_login_link(main_page, login_register_page, settings):
     main_page.check_url(settings.url("/cabinet"))
 
 
+@pytest.mark.test_id(id="HDR-UP-011")
+def test_login_link(main_page, login_register_page, settings):
+    """
+    title: Check link to the favorite via login menu
+    """
+
+    main_page.open(url=settings.url("/login"))
+    login_register_page.make_login(
+        settings.admin_email,
+        settings.admin_password
+    )
+    main_page.check_url(settings.url("/"))
+
+    main_page.upper_header.logged_user_menu.click()
+    expect(main_page.upper_header.menu_favorite_link).to_be_visible()
+    main_page.upper_header.menu_favorite_link.click()
+    main_page.check_url(settings.url("/favorites"))
 
