@@ -50,7 +50,7 @@ def test_phone_number_display(main_page):
     expect(phone_number).to_have_text("+38 (000) 000-00-00")
 
 @pytest.mark.test_id(id="HDR-UP-004")
-def test_phone_number_display(main_page):
+def test_phone_number_clickable(main_page):
     """
     title: Clickable phone number
     """
@@ -123,7 +123,7 @@ def test_tiktok_link(main_page):
 
 
 @pytest.mark.test_id(id="HDR-UP-009")
-def test_login_link(main_page):
+def test_account_icon_for_guest(main_page):
     """
     title: Account icon for guest
     """
@@ -139,7 +139,7 @@ def test_login_link(main_page):
 
 
 @pytest.mark.test_id(id="HDR-UP-010")
-def test_login_link(main_page, login_register_page, settings):
+def test_acc_icon_for_registered_user(main_page, login_register_page, settings):
     """
     title: Account icon for authenticated user
     """
@@ -158,7 +158,7 @@ def test_login_link(main_page, login_register_page, settings):
 
 
 @pytest.mark.test_id(id="HDR-UP-011")
-def test_login_link(main_page, login_register_page, settings):
+def test_favorite_link(main_page, login_register_page, settings):
     """
     title: Check link to the favorite via login menu
     """
@@ -179,7 +179,7 @@ def test_login_link(main_page, login_register_page, settings):
 
 
 @pytest.mark.test_id(id="HDR-UP-012")
-def test_login_link(main_page, login_register_page, settings):
+def test_check_logout(main_page, login_register_page, settings):
     """
     title: Check logout
     """
