@@ -1,3 +1,5 @@
+import time
+
 import pytest
 from playwright.sync_api import expect
 
@@ -137,13 +139,22 @@ def test_login_link(main_page):
 
 
 @pytest.mark.test_id(id="HDR-UP-010")
-def test_login_link(main_page):
+def test_login_link(main_page, login_register_page, settings):
     """
     title: Account icon for authenticated user
     """
 
-    main_page.open(url="http://localhost:3000/login")
+    main_page.open(url=settings.url("/login"))
+    login_register_page.make_login(
+        settings.admin_email,
+        settings.admin_password
+    )
+    main_page.check_url(settings.url("/"))
 
+    main_page.upper_header.logged_user_menu.click()
+    expect(main_page.upper_header.menu_cabinet_link).to_be_visible()
+    main_page.upper_header.menu_cabinet_link.click()
+    main_page.check_url(settings.url("/cabinet"))
 
 
 
