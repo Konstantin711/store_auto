@@ -5,93 +5,92 @@ from playwright.sync_api import expect
 
 
 @pytest.mark.test_id(id="HDR-UP-001")
-def test_about_us_link_disp(main_page):
+def test_about_us_link_disp(main_page, settings):
     """
     title: About Us link display
     """
 
-    main_page.open(url="http://localhost:3000/")
+    main_page.open(url=settings.url("/"))
 
     about_us_link = main_page.upper_header.about_us_page_link
     expect(about_us_link).to_be_visible()
     expect(about_us_link).to_have_attribute("href", "/about_us")
 
     about_us_link.click()
-    main_page.check_url("http://localhost:3000/about_us")
+    main_page.check_url(settings.url("/about_us"))
 
 
 @pytest.mark.test_id(id="HDR-UP-002")
-def test_delivery_and_pay_link(main_page):
+def test_delivery_and_pay_link(main_page, settings):
     """
     title: Delivery and Payment link
     """
 
-    main_page.open(url="http://localhost:3000/")
+    main_page.open(url=settings.url("/"))
 
     delivery_and_pay_link = main_page.upper_header.payment_delivery_page_link
     expect(delivery_and_pay_link).to_be_visible()
     expect(delivery_and_pay_link).to_have_attribute("href", "/delivery")
 
     delivery_and_pay_link.click()
-    main_page.check_url("http://localhost:3000/delivery")
+    main_page.check_url(settings.url("/delivery"))
 
 
 @pytest.mark.test_id(id="HDR-UP-003")
-def test_phone_number_display(main_page):
+def test_phone_number_display(main_page, settings):
     """
     title: Phone number display
     """
 
-    main_page.open(url="http://localhost:3000/")
+    main_page.open(url=settings.url("/"))
 
     phone_number = main_page.upper_header.contact_phone_number
     expect(phone_number).to_be_visible()
-
     expect(phone_number).to_have_text("+38 (000) 000-00-00")
 
 @pytest.mark.test_id(id="HDR-UP-004")
-def test_phone_number_clickable(main_page):
+def test_phone_number_clickable(main_page, settings):
     """
     title: Clickable phone number
     """
 
-    main_page.open(url="http://localhost:3000/")
+    main_page.open(url=settings.url("/"))
 
     phone_number = main_page.upper_header.contact_phone_number
     expect(phone_number).to_be_visible()
     expect(phone_number).to_have_attribute("href", "tel:+380000000000")
 
 @pytest.mark.test_id(id="HDR-UP-005")
-def test_email_display(main_page):
+def test_email_display(main_page, settings):
     """
     title: Email display
     """
 
-    main_page.open(url="http://localhost:3000/")
+    main_page.open(url=settings.url("/"))
 
     email = main_page.upper_header.contact_email
     expect(email).to_be_visible()
     expect(email).to_have_text("shirts-store@gmail.com")
 
 @pytest.mark.test_id(id="HDR-UP-006")
-def test_clickable_email(main_page):
+def test_clickable_email(main_page, settings):
     """
     title: Clickable email
     """
 
-    main_page.open(url="http://localhost:3000/")
+    main_page.open(url=settings.url("/"))
 
     email = main_page.upper_header.contact_email
     expect(email).to_be_visible()
     expect(email).to_have_attribute("href", "mailto:shirts-store@gmail.com")
 
 @pytest.mark.test_id(id="HDR-UP-007")
-def test_instagram_link(main_page):
+def test_instagram_link(main_page, settings):
     """
     title: Instagram link
     """
 
-    main_page.open(url="http://localhost:3000/")
+    main_page.open(url=settings.url("/"))
     instagram = main_page.upper_header.insta_link
     expect(instagram).to_be_visible()
     expect(instagram).to_have_attribute("href", "https://www.instagram.com")
@@ -104,12 +103,12 @@ def test_instagram_link(main_page):
 
 
 @pytest.mark.test_id(id="HDR-UP-008")
-def test_tiktok_link(main_page):
+def test_tiktok_link(main_page, settings):
     """
     title: TikTok link
     """
 
-    main_page.open(url="http://localhost:3000/")
+    main_page.open(url=settings.url("/"))
 
     tiktok = main_page.upper_header.tik_tok_link
     expect(tiktok).to_be_visible()
@@ -123,19 +122,19 @@ def test_tiktok_link(main_page):
 
 
 @pytest.mark.test_id(id="HDR-UP-009")
-def test_account_icon_for_guest(main_page):
+def test_account_icon_for_guest(main_page, settings):
     """
     title: Account icon for guest
     """
 
-    main_page.open(url="http://localhost:3000/")
+    main_page.open(url=settings.url("/"))
 
     login = main_page.upper_header.login_register_link
     expect(login).to_be_visible()
     expect(login).to_have_attribute("href", "/login")
 
     login.click()
-    main_page.check_url("http://localhost:3000/login")
+    main_page.check_url(settings.url("/login"))
 
 
 @pytest.mark.test_id(id="HDR-UP-010")
