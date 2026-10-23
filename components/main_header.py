@@ -6,7 +6,7 @@ class MainHeader:
         self._page = page
         self.logo_icon = page.get_by_role("link", name="MATCH TOBI")
         self.search_input = page.get_by_role("combobox", name="Пошук товарів", exact=True)
-        self.like_link = page.locator("//a[@href='/favorites']")
+        self.like_link = page.locator("//a[@href='/favorits']")
         self.cart_link = page.locator("//a[@href='/cart']")
 
 

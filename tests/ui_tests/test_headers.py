@@ -175,7 +175,7 @@ def test_favorite_link(main_page, login_register_page, settings):
     favorite_link = main_page.upper_header.menu_favorite_link
     expect(favorite_link).to_be_visible()
     favorite_link.click()
-    main_page.check_url(settings.url("/favorites"))
+    main_page.check_url(settings.url("/favorits"))
 
 
 @pytest.mark.test_id(id="HDR-UP-012")
