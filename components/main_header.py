@@ -9,6 +9,16 @@ class MainHeader:
         self.like_link = page.locator("//a[@href='/favorits']")
         self.cart_link = page.locator("//a[@href='/cart']")
 
+        self.man_menu = page.get_by_role(
+            "button",
+            name="Чоловіче",
+            exact=True
+        )
+        self.women_menu = page.get_by_role(
+            "button",
+            name="Жіноче",
+            exact=True
+        )
 
     def click_logo(self):
         self.logo_icon.click()

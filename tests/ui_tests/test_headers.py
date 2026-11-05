@@ -200,3 +200,70 @@ def test_check_logout(main_page, login_register_page, settings):
     assert main_page.page.evaluate(
         "() => localStorage.getItem('UserInfo')"
     ) is None
+
+@pytest.mark.test_id(id="HDR-MAIN-001")
+def test_main_logo(main_page, settings):
+    """
+    title: Main logo display
+    """
+
+    main_page.open(url=settings.url("/"))
+    logo = main_page.main_header.logo_icon
+    expect(logo).to_have_attribute("href", "/")
+
+@pytest.mark.test_id(id="HDR-MAIN-002")
+def test_main_logo_clickable(main_page, settings):
+    """
+    title: Logo navigation link
+    """
+
+    main_page.open(url=settings.url("/delivery"))
+    logo = main_page.main_header.logo_icon
+    logo.click()
+    main_page.check_url(settings.url("/"))
+
+@pytest.mark.test_id(id="HDR-MAIN-003")
+def test_gender_navigation(main_page, settings):
+    """
+    title: Gender navigation display
+    """
+    main_page.open(url=settings.url("/"))
+
+    main_header = main_page.main_header
+    expect(main_header.man_menu).to_be_visible()
+    expect(main_header.women_menu).to_be_visible()
+
+@pytest.mark.test_id(id="HDR-MAIN-004")
+def test_mans_categories_dd(main_page, settings, db_get_men_nav_menu):
+    """
+    title: Men's categories dropdown
+    """
+
+    titles = [*db_get_men_nav_menu, "Усі товари"]
+
+    main_page.open(url=settings.url("/"))
+
+    navigation = main_page.main_header.man_menu
+    navigation.click()
+    expect(navigation).to_be_visible()
+
+    for title in titles:
+        expect(main_page.page.locator(f"//a[text()='{title}']")).to_be_visible()
+
+
+@pytest.mark.test_id(id="HDR-MAIN-005")
+def test_woman_categories_dd(main_page, settings, db_get_woman_nav_menu):
+    """
+    title: Women's categories dropdown
+    """
+
+    titles = [*db_get_woman_nav_menu, "Усі товари"]
+
+    main_page.open(url=settings.url("/"))
+
+    navigation = main_page.main_header.women_menu
+    navigation.click()
+    expect(navigation).to_be_visible()
+
+    for title in titles:
+        expect(main_page.page.locator(f"//a[text()='{title}']")).to_be_visible()
