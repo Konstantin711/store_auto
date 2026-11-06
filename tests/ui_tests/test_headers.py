@@ -234,12 +234,13 @@ def test_gender_navigation(main_page, settings):
     expect(main_header.women_menu).to_be_visible()
 
 @pytest.mark.test_id(id="HDR-MAIN-004")
-def test_mans_categories_dd(main_page, settings, db_get_men_nav_menu):
+def test_mans_categories_dd(main_page, settings, db_get_nav_menu):
     """
     title: Men's categories dropdown
     """
 
-    titles = [*db_get_men_nav_menu, "Усі товари"]
+    titles = db_get_nav_menu("man")
+    titles.append("Усі товари")
 
     main_page.open(url=settings.url("/"))
 
@@ -252,12 +253,13 @@ def test_mans_categories_dd(main_page, settings, db_get_men_nav_menu):
 
 
 @pytest.mark.test_id(id="HDR-MAIN-005")
-def test_woman_categories_dd(main_page, settings, db_get_woman_nav_menu):
+def test_woman_categories_dd(main_page, settings, db_get_nav_menu):
     """
     title: Women's categories dropdown
     """
 
-    titles = [*db_get_woman_nav_menu, "Усі товари"]
+    titles = db_get_nav_menu("woman")
+    titles.append("Усі товари")
 
     main_page.open(url=settings.url("/"))
 
@@ -267,3 +269,26 @@ def test_woman_categories_dd(main_page, settings, db_get_woman_nav_menu):
 
     for title in titles:
         expect(main_page.page.locator(f"//a[text()='{title}']")).to_be_visible()
+
+
+@pytest.mark.test_id(id="HDR-MAIN-007")
+def test_category_link_config(main_page, settings, db_get_nav_hrefs):
+    """
+    title: Category link configuration
+    """
+
+    men_hrefs, women_hrefs = db_get_nav_hrefs
+    main_page.open(url=settings.url("/"))
+
+    man_menu = main_page.main_header.man_menu
+    man_menu.click()
+    expect(man_menu).to_be_visible()
+    for href in men_hrefs:
+        expect(main_page.page.locator(f"//a[@href='{href}']")).to_be_visible()
+
+    women_menu = main_page.main_header.women_menu
+    women_menu.click()
+    expect(women_menu).to_be_visible()
+    for href in women_hrefs:
+        expect(main_page.page.locator(f"//a[@href='{href}']")).to_be_visible()
+
